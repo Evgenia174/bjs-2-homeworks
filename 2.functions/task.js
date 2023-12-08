@@ -12,7 +12,7 @@ function getArrayParams(...arr) {
     }
     sum += arr[i];
   }
-  const avg = (Number(sum / arr.length)).toFixed(2);
+  const avg = Number((sum / arr.length).toFixed(2));
   return { min: min, max: max, avg: avg };
 }
 console.log(getArrayParams(1, 2, 3, -100, 10));
@@ -36,8 +36,8 @@ console.log(summElementsWorker());
 
 
 function differenceMaxMinWorker(...arr) {
-  let min = 0;
-  let max = 0;
+  let min = Infinity;
+  let max = -Infinity;
   if (!hasElementsInArray(arr)) {
     return 0;
   }
@@ -55,7 +55,7 @@ function differenceMaxMinWorker(...arr) {
 console.log(differenceMaxMinWorker(10, 10, 11, 20, 10));
 
 
-/////////////////Считает не то что надо//////////////////////
+///////////////////////////////////////
 
 function differenceEvenOddWorker(...arr) {
   let sumEvenElement = 0;
@@ -74,6 +74,7 @@ function differenceEvenOddWorker(...arr) {
   return sumEvenElement - sumOddElement;
 }
 console.log(differenceEvenOddWorker(94, 51, 57, 41, 47, 66, 58, 10, 38, 17));
+
 /////////////////////////////////////////////////////////////
 
 function averageEvenElementsWorker(...arr) {
@@ -93,9 +94,7 @@ function averageEvenElementsWorker(...arr) {
 }
 console.log(averageEvenElementsWorker(1, 2, 3, 4, 5, 6, 7, 8, 9));
 
-
-
-/////////////не понимаю как написать..../////////////////////
+//////////////////////////////////
 
 function makeWork(arrOfArr, func) {
   let maxWorkerResult = -Infinity;
@@ -108,4 +107,3 @@ function makeWork(arrOfArr, func) {
   }
   return maxWorkerResult;
 }
-console.log(makeWork(arr, summElementsWorker));
