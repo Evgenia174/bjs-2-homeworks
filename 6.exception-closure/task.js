@@ -1,4 +1,5 @@
-﻿////////////// 1 //////////////
+﻿/*
+////////////// 1 //////////////
 function parseCount(incomingValue) {
     try {
       const parsedValue = Number.parseFloat(incomingValue); 
@@ -60,3 +61,64 @@ class Triangle {
       };
     }
   }
+*/
+
+function parseCount(incomingValue) {
+  try {
+    const parsedValue = Number.parseFloat(incomingValue);
+    if (isNaN(Number.parseFloat(incomingValue))) {
+      throw new Error("Невалидное значение");
+    }
+    return parsedValue;
+  } catch (error) {
+    return error;
+  }
+}
+
+function validateCount(incomingValue) {
+  try {
+    let result = parseCount(incomingValue);
+    return result;
+  } catch (error) {
+    return error;
+  }
+}
+
+class Triangle {
+  constructor(a, b, c) {
+    this.a = a;
+    this.b = b;
+    this.c = c;
+    if (a + b < c || a + c < b || b + c < a) {
+      throw new Error("Треугольник с такими сторонами не существует");
+    }
+  }
+
+  get perimetr() {
+    return this.a + this.b + this.c;
+  }
+  get area() {
+    const semiPerimeter = this.perimetr / 2;
+    return Math.sqrt(
+      semiPerimeter *
+        (semiPerimeter - this.a) *
+        (semiPerimeter - this.b) *
+        (semiPerimeter - this.c),
+    );
+  }
+}
+
+function getTriangle(a, b, c) {
+  try {
+    return new Triangle(a, b, c);
+  } catch (error) {
+    return {
+      get area() {
+        return "Ошибка! Треугольник не существует";
+      },
+      get perimetr() {
+        return "Ошибка! Треугольник не существует";
+      },
+    };
+  }
+}
