@@ -1,26 +1,29 @@
 class PrintEditionItem {
-    constructor(name, releaseDate, pagesCount) {
-      this.name = name;
-      this.releaseDate = releaseDate;
-      this.pagesCount = pagesCount;
-      this.state = 100;
-      this.type = null;
-    }
-  
-    fix() {
-      this.state = this.state * 1.5;
-    }
+  constructor(name, releaseDate, pagesCount) {
+    this.name = name;
+    this.releaseDate = releaseDate;
+    this.pagesCount = pagesCount;
+    this.state = 100;
+    this.type = null;
+  }
+
+  fix() {
+    this.state = this.state * 1.5;
+  }
   
     ///////////// выдает ошибку Expected 135 to equal 100////////////
     set state(newValue) {
         this._state = newValue;
-        if (newValue < 0) {
-        newValue = 0;
-        } else if (newValue > 100) {
-        newValue = 100;
-        } else if (newValue > 0) {
-        newValue = newValue;
+        if (newValue === 0) {
+          return;
         }
+        if (newValue >= 0 && newValue <= 100) {
+          newValue = newValue;
+          } else if (newValue < 0) {
+          newValue = 0;
+          } else if (newValue > 100) {
+            return 100;
+          }
         }
         get state() {
         return this._state;
@@ -67,25 +70,39 @@ class PrintEditionItem {
 
 
   class Library {
-    constructor(name, books) { // почему books не определена? 
+    constructor(name) {
       this.name = name;
       this.books = [];
     }
+    
     addBook(book) {
       if (book.state > 30) {
-        this.books.push(books);
+        this.books.push(book);
       }
     }
   
     findBookBy(type, value) {
-      for (let i = 0; i <= this.books.length; i++) {
-        if (this.books[i].hasOwnProperty(type) && this.books[i][type] === value) {
-          return this.books[i];
+      for (let book of this.books) {
+        if (book[type] === value) {
+          return book;
+        } else {
+          return null;
+        }
+      }       
+    }
+
+    giveBookByName(bookName) {
+      for (let i = 0; i < this.books.length; i++) {
+        if (this.books[i].name === bookName) {
+        this.books.splice(i, 1);
+        return this.books;
+        } else {
+          return null;
         }
       }
-      return null;
     }
-  }
+  }      
+
 
 
 
