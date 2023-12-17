@@ -80,22 +80,17 @@ class PrintEditionItem {
     }
   
     findBookBy(type, value) {
-      for (let book of this.books) {
-        if (book[type] === value) {
-          return book;
-        }
-      }
-      return null;
+      return this.books.find(book => book[type] === value);
     }    
   
 
     giveBookByName(bookName) {
-      for (let i = 0; i < this.books.length; i++) {
-        if (this.books[i].name === bookName) {
-          this.books.splice(i, 1);
-          return this.books;
-        }
+      let foundBook = this.findBookBy("name", bookName);
+      if (foundBook) {
+        this.books.splice(this.books.indexOf(foundBook), 1);
+        return foundBook;
+      } else {
+        return null;
       }
-      return null;
     }
   }
