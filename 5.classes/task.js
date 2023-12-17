@@ -1,3 +1,4 @@
+
 class PrintEditionItem {
   constructor(name, releaseDate, pagesCount) {
     this.name = name;
@@ -13,21 +14,18 @@ class PrintEditionItem {
   
     ///////////// выдает ошибку Expected 135 to equal 100////////////
     set state(newValue) {
-        this._state = newValue;
-        if (newValue === 0) {
-          return;
-        }
-        if (newValue >= 0 && newValue <= 100) {
-          newValue = newValue;
-          } else if (newValue < 0) {
-          newValue = 0;
-          } else if (newValue > 100) {
-            return 100;
-          }
-        }
-        get state() {
-        return this._state;
-        }
+      this._state = newValue;
+      if (newValue >= 0 && newValue <= 100) {
+        newValue = newValue;
+      } else if (newValue < 0) {
+        newValue = 0;
+      } else if (newValue > 100) {
+        newValue = 100;
+      }
+    }
+    get state() {
+      return this._state;
+    }
   }
   //////////////////////////////////////////////////////
   
@@ -85,26 +83,19 @@ class PrintEditionItem {
       for (let book of this.books) {
         if (book[type] === value) {
           return book;
-        } else {
-          return null;
         }
-      }       
-    }
+      }
+      return null;
+    }    
+  
 
     giveBookByName(bookName) {
       for (let i = 0; i < this.books.length; i++) {
         if (this.books[i].name === bookName) {
-        this.books.splice(i, 1);
-        return this.books;
-        } else {
-          return null;
+          this.books.splice(i, 1);
+          return this.books;
         }
       }
+      return null;
     }
-  }      
-
-
-
-
-
-  
+  }
