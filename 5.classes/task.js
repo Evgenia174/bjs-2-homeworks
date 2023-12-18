@@ -12,17 +12,17 @@ class PrintEditionItem {
     this.state = this.state * 1.5;
   }
   
-    ///////////// выдает ошибку Expected 135 to equal 100////////////
+    /////////////////////////
     set state(newValue) {
-      this._state = newValue;
       if (newValue >= 0 && newValue <= 100) {
         newValue = newValue;
       } else if (newValue < 0) {
         newValue = 0;
       } else if (newValue > 100) {
         newValue = 100;
-      }
-    }
+      } 
+      this._state = newValue;
+    } 
     get state() {
       return this._state;
     }
@@ -65,7 +65,7 @@ class PrintEditionItem {
     }
   }
 
-
+///////////////////////////////////////////
 
   class Library {
     constructor(name) {
