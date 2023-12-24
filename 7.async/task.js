@@ -4,12 +4,11 @@ class AlarmClock {
       this.intervalId = null;
     }
     addClock(time, callback) {
-      if (time === undefined || callback === undefined) {
-        throw new Error("Отсутствуют обязательные аргументы");
-      } else if (this.alarmCollection.find((setup) => setup.time === time)) {
+      if (!(time && callback)) {
+    throw new Error("Отсутствуют обязательные аргументы");
+    } else if (this.alarmCollection.find((setup) => setup.time === time))
         console.warn("Уже присутствует звонок на это же время");
-      }
-      this.alarmCollection.push({
+        this.alarmCollection.push({
         callback: callback,
         time: time,
         canCall: true,
@@ -21,8 +20,10 @@ class AlarmClock {
       });
     }
     getCurrentFormattedTime() {
-      let date = new Date();
-      return date.toLocaleTimeString();
+      new Date().toLocaleTimeString("ru-Ru", {
+        hour: "2-digit",
+        minute: "2-digit",
+      });
     }
     start() {
       if (this.intervalId) {
