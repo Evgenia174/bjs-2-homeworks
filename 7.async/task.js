@@ -3,7 +3,8 @@ class AlarmClock {
       this.alarmCollection = [];
       this.intervalId = null;
     }
-    addClock(time, callback) {
+
+    addClock(time, callback) { // если не исправлять этот пункт, то проххожу по тестам, если переписать на 2 условия, то выдает ошибку
       if (!(time && callback)) {
     throw new Error("Отсутствуют обязательные аргументы");
     } else if (this.alarmCollection.find((setup) => setup.time === time))
@@ -14,13 +15,34 @@ class AlarmClock {
         canCall: true,
       });
     }
-    removeClock(time) {
-      this.alarmCollection = this.alarmCollection.filter((item) => {
-        return item.time !== time;
+
+    /*
+    addClock(time, callback) { // выдает ошибку, не знаю где косяк
+    if (!(time && callback)) {
+      throw new Error("Отсутствуют обязательные аргументы");
+    }
+    const matchAlarm = this.alarmCollection.find(
+      (setup) => setup.time === time,
+    );
+    if (matchAlarm) {
+      console.warn("Уже присутствует звонок на это же время");
+    } else {
+      this.alarmCollection.push({
+        callback: callback,
+        time: time,
+        canCall: true,
       });
     }
+  }
+  */
+
+    removeClock(time) {
+      this.alarmCollection = this.alarmCollection.filter(
+        (item) => item.time !== time,
+      );
+    }
     getCurrentFormattedTime() {
-      new Date().toLocaleTimeString("ru-Ru", {
+      return new Date().toLocaleTimeString("ru-Ru", {
         hour: "2-digit",
         minute: "2-digit",
       });
@@ -50,4 +72,5 @@ class AlarmClock {
       this.alarmCollection = [];
     }
   }
+
   
